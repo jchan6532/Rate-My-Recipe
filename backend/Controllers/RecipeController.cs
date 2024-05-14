@@ -19,9 +19,9 @@ public class RecipeController : ControllerBase
         return new ObjectResult(new {a = 1});
     }
 
-    [HttpGet(template: "all", Name = "GetAllRecipes")]
-    public IActionResult Get()
+    [HttpGet(template: "none", Name = "GetNoneRecipes")]
+    public IActionResult Getnone()
     {
-        return new ObjectResult(new {a = 1});
+        return new ObjectResult(new {a = 0});
     }
 }

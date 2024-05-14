@@ -13,7 +13,7 @@ namespace backend.Data
             Configuration = configuration;
         }
         protected override void OnConfiguring(DbContextOptionsBuilder options){
-            options.UseNpgsql(Configuration.GetConnectionString(""));
+            options.UseNpgsql(Configuration.GetConnectionString("DefaultParam"));
         }
 
         public DbSet<Recipe> Recipes { get; set; }

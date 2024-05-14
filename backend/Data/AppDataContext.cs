@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using backend.Models;
 
 namespace backend.Data
 {
@@ -11,15 +12,11 @@ namespace backend.Data
         {
             Configuration = configuration;
         }
-
-        public class AppDataContext : DbContext
-        {
-            protected override void OnConfiguring(DbContextOptionsBuilder options){
-                options.UseNpgsql(Configuration.GetConnectionString(""));
-            }
+        protected override void OnConfiguring(DbContextOptionsBuilder options){
+            options.UseNpgsql(Configuration.GetConnectionString(""));
         }
 
-        public DbSet<> Recipes { get; set; }
-        public DbSet<> Users { get; set; }
+        public DbSet<Recipe> Recipes { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

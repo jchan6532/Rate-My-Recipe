@@ -1,6 +1,11 @@
+using Microsoft.EntityFrameworkCore;
+using backend.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 {
     // Add services to the container.
+    builder.Services.AddDbContext<IDbContext, AppDataContext>(options => 
+        options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultParam")));
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();

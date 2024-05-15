@@ -10,7 +10,15 @@ lerna-debug.log*
 #dlls
 *.dll
 
+# web api env
+**/appsettings.json*
+**/appsettings.Development.json*
+**/launchSettings.json*
+
+# node
 /node_modules
+
+/Migrations
 
 bin
 obj

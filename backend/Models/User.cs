@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace backend.Models
@@ -29,6 +30,9 @@ namespace backend.Models
 
         [Required]
         [DataType(DataType.DateTime)]
-        public DateTime createdAt { get; set; }
+        [DefaultValue(typeof(DateTime), "")]
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+        public ICollection<Recipe> Recipes { get; set; } = new List<Recipe>();
     }
 }

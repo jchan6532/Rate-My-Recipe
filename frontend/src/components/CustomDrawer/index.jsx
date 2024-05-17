@@ -82,6 +82,15 @@ const CustomDrawer = ({ page }) => {
         </Stack>
       </IconButton>
       <Drawer anchor='left' open={open} onClose={toggleDrawer(false)}>
+        <Box display='flex' justifyContent='center' alignItems='center'>
+          <img
+            alt='profile-user'
+            width='100px'
+            height='100px'
+            src={`./images/default-recipe.jpg`}
+            style={{ cursor: 'pointer', borderRadius: '50%' }}
+          />
+        </Box>
         {ListMarkUp}
       </Drawer>
     </Box>

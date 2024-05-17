@@ -15,19 +15,32 @@ import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import SearchIcon from '@mui/icons-material/Search';
-import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
 import Header from '../Header';
+import { useAuthContext } from '../../contexts/AuthContext';
 
 const Topbar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
+  const { logout } = useAuthContext();
   const navigate = useNavigate();
 
+  const signOutHandler = (event) => {
+    event.preventDefault();
+    logout();
+  };
+
   return (
-    <Box display={'flex'} justifyContent={'space-between'} p={2} pt={4}>
+    <Box
+      display={'flex'}
+      justifyContent={'space-between'}
+      p={2}
+      pt={4}
+      position={'sticky'}
+      top={0}
+    >
       <Typography
         variant='h2'
         color={colors.grey[100]}
@@ -124,7 +137,7 @@ const Topbar = () => {
               },
             }}
           >
-            <IconButton>
+            <IconButton onClick={signOutHandler}>
               <LogoutIcon />
             </IconButton>
           </Tooltip>

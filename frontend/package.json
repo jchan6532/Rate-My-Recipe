@@ -1,6 +1,5 @@
 {
   "name": "frontend",
-  "proxy": "http://localhost:5155",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -13,7 +12,8 @@
     "@fullcalendar/react": "^5.11.2",
     "@fullcalendar/timegrid": "^6.1.11",
     "@mui/icons-material": "^5.15.13",
-    "@mui/material": "^5.15.13",
+    "@mui/lab": "^5.0.0-alpha.170",
+    "@mui/material": "^5.15.18",
     "@mui/x-data-grid": "^6.19.6",
     "@nivo/bar": "^0.85.1",
     "@nivo/core": "^0.85.1",
@@ -22,7 +22,7 @@
     "@nivo/pie": "^0.85.1",
     "@tanstack/react-query": "^5.36.2",
     "axios": "^1.6.8",
-    "firebase": "^10.10.0",
+    "firebase": "^10.12.0",
     "formik": "^2.4.5",
     "moment": "^2.30.1",
     "prettier": "^3.2.5",

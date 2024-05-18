@@ -8,10 +8,12 @@ import Profile from './pages/Profile';
 import Recipe from './pages/Recipe';
 import Settings from './pages/Settings';
 import useQueryClient from './hooks/useQueryClient';
-import { QueryClientProvider } from '@tanstack/react-query';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import Topbar from './components/Topbar';
 import Login from './pages/Authentication/Login';
 import { useAuthContext } from './contexts/AuthContext';
+
+const qc = new QueryClient();
 
 const App = () => {
   const [theme, colorMode] = useMode();
@@ -19,7 +21,7 @@ const App = () => {
   const { authenticated } = useAuthContext();
 
   return (
-    <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={qc}>
       <ColorModeContext.Provider value={colorMode}>
         <ThemeProvider theme={theme}>
           <CssBaseline />

@@ -7,7 +7,7 @@ namespace backend.Models
     public class Recipe
     {
         [Key]
-        public int Id { get; set; }
+        public string Id { get; set; } = Guid.NewGuid().ToString();
 
         [Required]
         [StringLength(50)]
@@ -25,8 +25,9 @@ namespace backend.Models
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         [ForeignKey(nameof(User))]
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
-        public User User { get; set; }
+        public User? User { get; set; }
+        public ICollection<Like>? Likes { get; set; }
     }
 }

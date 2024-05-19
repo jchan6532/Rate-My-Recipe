@@ -5,24 +5,29 @@ import LightModeOutlined from '@mui/icons-material/LightModeOutlined';
 import DarkModeOutlined from '@mui/icons-material/DarkModeOutlined';
 import { useAuthContext } from '../../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import GoogleSignIn from '../../../components/GoogleSignIn';
 
 const Login = () => {
   const [signIn, toggle] = useState(true);
   const [backgroundMode, setBackgroundMode] = useState('light');
-  const { login, authenticated } = useAuthContext();
+  const { login, authenticated, user } = useAuthContext();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (authenticated) navigate('/');
-  }, [authenticated, navigate]);
+    if (authenticated && user) navigate('/');
+  }, [authenticated, user, navigate]);
 
   const signInHandler = (event) => {
     event.preventDefault();
-    login();
+    try {
+      login();
+    } catch (error) {}
   };
   const signUpHanlder = (event) => {
     event.preventDefault();
-    login();
+    try {
+      login();
+    } catch (error) {}
   };
 
   return (
@@ -63,6 +68,7 @@ const Login = () => {
             <Components.Button onClick={signUpHanlder}>
               Sign Up
             </Components.Button>
+            <GoogleSignIn isSignUp />
           </Components.Form>
         </Components.SignUpContainer>
 
@@ -89,6 +95,7 @@ const Login = () => {
             <Components.Button onClick={signInHandler}>
               Sign In
             </Components.Button>
+            <GoogleSignIn />
           </Components.Form>
         </Components.SignInContainer>
         <Components.OverlayContainer signIn={signIn}>

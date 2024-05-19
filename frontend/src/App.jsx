@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Profile from './pages/Profile';
 import Recipe from './pages/Recipe';
 import Settings from './pages/Settings';
+import NotFound from './pages/NotFound';
 import useQueryClient from './hooks/useQueryClient';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import Topbar from './components/Topbar';
@@ -31,11 +32,12 @@ const App = () => {
             <main className='content'>
               {authenticated && <Topbar />}
               <Routes>
-                <Route path='/welcomeback' element={<Login />} />
-                <Route path='/' element={<Home />} />
-                <Route path={`/profile/:userId`} element={<Profile />} />
-                <Route path='/recipe/:recipeId' element={<Recipe />} />
-                <Route path='/settings' element={<Settings />} />
+                <Route exact path='/welcomeback' element={<Login />} />
+                <Route exact path='/' element={<Home />} />
+                <Route exact path={`/profile/:userId`} element={<Profile />} />
+                <Route exact path='/recipe/:recipeId' element={<Recipe />} />
+                <Route exact path='/settings' element={<Settings />} />
+                <Route path='*' element={<NotFound />} />
               </Routes>
             </main>
           </div>

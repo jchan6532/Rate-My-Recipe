@@ -78,17 +78,30 @@ export const Button = styled.button`
   padding: 12px 45px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  transition: transform 80ms ease-in;
+  transition:
+    transform 80ms ease-in,
+    box-shadow 300ms ease-in-out;
   &:active {
     transform: scale(0.95);
   }
   &:focus {
     outline: none;
   }
+  cursor: pointer;
+  &:hover {
+    box-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.3),
+      0 2px 4px rgba(0, 0, 0, 0.2);
+  }
 `;
 export const GhostButton = styled(Button)`
   background-color: transparent;
   border-color: #ffffff;
+
+  &:hover {
+    color: #ff416c; // Change text color on hover
+    background-color: white; // Change background color on hover
+  }
 `;
 
 export const Anchor = styled.a`

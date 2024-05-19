@@ -7,9 +7,10 @@ const useFetchRecipes = () => {
       recipes = await recipesApi.get('/all');
     } catch (error) {
       recipes = null;
+      throw error;
     }
 
-    return recipes;
+    return recipes?.data;
   };
 
   return { fetchRecipes };

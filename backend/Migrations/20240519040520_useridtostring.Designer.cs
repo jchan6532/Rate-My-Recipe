@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using backend.Data;
@@ -11,9 +12,11 @@ using backend.Data;
 namespace backend.Migrations
 {
     [DbContext(typeof(AppDataContext))]
-    partial class AppDataContextModelSnapshot : ModelSnapshot
+    [Migration("20240519040520_useridtostring")]
+    partial class useridtostring
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,25 +46,13 @@ namespace backend.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("backend.Models.Like", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("character varying(255)");
-
-                    b.Property<string>("RecipeId")
-                        .HasColumnType("character varying(255)");
-
-                    b.HasKey("UserId", "RecipeId");
-
-                    b.HasIndex("RecipeId");
-
-                    b.ToTable("Likes");
-                });
-
             modelBuilder.Entity("backend.Models.Recipe", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("character varying(255)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -111,31 +102,13 @@ namespace backend.Migrations
                         .HasColumnType("character varying(50)");
 
                     b.Property<string>("Password")
+                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("backend.Models.Like", b =>
-                {
-                    b.HasOne("backend.Models.Recipe", "Recipe")
-                        .WithMany("Likes")
-                        .HasForeignKey("RecipeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("backend.Models.User", "User")
-                        .WithMany("Likes")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Recipe");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("backend.Models.Recipe", b =>
@@ -149,15 +122,8 @@ namespace backend.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("backend.Models.Recipe", b =>
-                {
-                    b.Navigation("Likes");
-                });
-
             modelBuilder.Entity("backend.Models.User", b =>
                 {
-                    b.Navigation("Likes");
-
                     b.Navigation("Recipes");
                 });
 #pragma warning restore 612, 618

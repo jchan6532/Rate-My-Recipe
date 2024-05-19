@@ -1,6 +1,6 @@
 import { ColorModeContext, useMode } from './theme';
 import { Box, CssBaseline, ThemeProvider } from '@mui/material';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import CustomDrawer from './components/CustomDrawer';
 import Home from './pages/Home';
@@ -20,6 +20,23 @@ const App = () => {
   const [theme, colorMode] = useMode();
   const { queryClient } = useQueryClient();
   const { authenticated } = useAuthContext();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const validPaths = [
+    '/welcomeback',
+    '/',
+    '/profile',
+    '/recipe/:recipeId',
+    '/settings',
+  ];
+
+  const isValidPath = validPaths.some((path) => {
+    const regexPath = new RegExp(`^${path.replace(/:\w+/g, '[^/]+')}$`);
+    return regexPath.test(location.pathname);
+  });
+
+  if (!isValidPath) navigate('/notfound');
 
   return (
     <QueryClientProvider client={qc}>
@@ -34,9 +51,10 @@ const App = () => {
               <Routes>
                 <Route exact path='/welcomeback' element={<Login />} />
                 <Route exact path='/' element={<Home />} />
-                <Route exact path={`/profile/:userId`} element={<Profile />} />
+                <Route exact path='/profile' element={<Profile />} />
                 <Route exact path='/recipe/:recipeId' element={<Recipe />} />
                 <Route exact path='/settings' element={<Settings />} />
+                <Route path='/notfound' element={<NotFound />} />
                 <Route path='*' element={<NotFound />} />
               </Routes>
             </main>

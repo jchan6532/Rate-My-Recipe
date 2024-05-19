@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Icon, IconButton, useTheme } from '@mui/material';
-import { tokens } from '../../theme';
+import { IconButton, useTheme } from '@mui/material';
 import { Box } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -9,7 +8,6 @@ import Typography from '@mui/material/Typography';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import CommentOutlinedIcon from '@mui/icons-material/CommentOutlined';
 import BookmarksOutlinedIcon from '@mui/icons-material/BookmarksOutlined';
-import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 import { CardActionArea, CardActions } from '@mui/material';
 import moment from 'moment';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -26,10 +24,14 @@ const StyledRating = styled(Rating)({
   },
 });
 
+const defaultRating = 1;
+
 const RecipeCard = ({ RecipeData, options }) => {
   const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
   const [thumbnail, setThumbnail] = useState('./images/default-recipe.jpg');
+  const [rating, setRating] = useState(defaultRating);
+
+  useEffect(() => console.log(rating), [rating]);
 
   return (
     <Card
@@ -83,11 +85,12 @@ const RecipeCard = ({ RecipeData, options }) => {
           </Box>
           <StyledRating
             name='customized-color'
-            defaultValue={2}
+            defaultValue={defaultRating}
             getLabelText={(value) => `${value} Heart${value !== 1 ? 's' : ''}`}
             precision={1}
             icon={<FavoriteIcon fontSize='inherit' />}
             emptyIcon={<FavoriteBorderIcon fontSize='inherit' />}
+            onChange={(e, newRating) => setRating(newRating ?? 0)}
           />
           <Box displat='flex'>
             <IconButton sx={{ ':hover': { background: '#a3a3a3' } }}>

@@ -8,7 +8,7 @@ const fetchRecipe = async () => {
 
 const Recipe = () => {
   const { recipeId } = useParams();
-  const { recipe, status } = useQuery('recipe', fetchRecipe);
+  //const { recipe, status } = useQuery('recipe', fetchRecipe);
 
   return (
     <div>

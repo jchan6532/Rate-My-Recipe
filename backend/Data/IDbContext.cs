@@ -8,6 +8,7 @@ namespace backend.Data
         DbSet<Recipe> Recipes { get; set; }
         DbSet<User> Users { get; set; }
         DbSet<Comment> Comments { get; set; }
+        DbSet<Like> Likes { get; set; }
         int SaveChanges();
         int SaveChanges(bool acceptAllChangesOnSuccess);
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);

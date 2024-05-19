@@ -21,16 +21,31 @@ namespace backend.Controllers{
         [HttpGet(template: "all", Name = "GetAllRecipes")]
         public async Task<IActionResult> GetAllRecipes()
         {
-            var recipes = _context.Recipes.ToListAsync();
-            return Ok(new {recipes = recipes});
+            var recipes = await _context.Recipes.ToListAsync();
+            var sortedRecipes = recipes.OrderByDescending(recipe => recipe.CreatedAt);
+            return Ok(new {recipes = sortedRecipes});
+        }
+
+        [HttpGet("{recipeId}", Name = "GetRecipe")]
+        public async Task<IActionResult> GetRecipe([FromRoute] int recipeId)
+        {
+            var recipe = await _context.Recipes.FindAsync(recipeId);
+            if (recipe is null) return NotFound(recipeId);
+            return Ok(new {recipes = recipe});
         }
 
         [HttpPost(template: "new", Name = "InsertRecipe")]
-        public async Task<IActionResult> InsertRecipe(Recipe recipe)
+        public async Task<IActionResult> InsertRecipe([FromBody] Recipe recipe, [FromQuery] string userId)
         {
+            if (recipe is null) return BadRequest();
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            
+            recipe.Id ??= Guid.NewGuid().ToString();
+            recipe.UserId = userId;
+            recipe.CreatedAt = DateTime.UtcNow;
             _context.Recipes.Add(recipe);
             int result = await _context.SaveChangesAsync();
-            if (result != 1) return BadRequest(result);
+            if (result != 1) return BadRequest(new { result = result, error = "Recipe was unable to be saved" });
             return NoContent();
         }
 

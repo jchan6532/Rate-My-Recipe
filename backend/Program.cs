@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 {
     // Add services to the container.
     builder.Services.AddDbContext<IDbContext, AppDataContext>(options => 
-        options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultParam")));
+        options.UseNpgsql(builder.Configuration.GetConnectionString("RemoteParam")));
     builder.Services.AddTransient<IUserAuthService, UserAuthService>();
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
@@ -15,6 +15,14 @@ var builder = WebApplication.CreateBuilder(args);
         options.AddPolicy("AllowFrontEnd", 
         builder => {
             builder.WithOrigins("http://localhost:3000")
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+    });
+    builder.Services.AddCors(options => {
+        options.AddPolicy("AllowRemoteFrontEnd", 
+        builder => {
+            builder.WithOrigins("https://rate-my-recipe.vercel.app")
                 .AllowAnyHeader()
                 .AllowAnyMethod();
         });
@@ -33,6 +41,7 @@ var app = builder.Build();
     app.UseHttpsRedirection();
 
     app.UseCors("AllowFrontEnd");
+    app.UseCors("AllowRemoteFrontEnd");
 
     app.UseAuthorization();
 

@@ -24,11 +24,8 @@ namespace backend.Migrations
 
             modelBuilder.Entity("backend.Models.Comment", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    b.Property<string>("Id")
+                        .HasColumnType("character varying(255)");
 
                     b.Property<string>("Content")
                         .IsRequired()

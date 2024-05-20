@@ -1,12 +1,5 @@
-import {
-  Box,
-  Icon,
-  IconButton,
-  Tooltip,
-  Typography,
-  useTheme,
-} from '@mui/material';
-import { useContext, useEffect } from 'react';
+import { Box, IconButton, Tooltip, Typography, useTheme } from '@mui/material';
+import { useContext } from 'react';
 import { ColorModeContext, tokens } from '../../theme';
 import InputBase from '@mui/material/InputBase';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
@@ -17,7 +10,6 @@ import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import SearchIcon from '@mui/icons-material/Search';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
-import Header from '../Header';
 import { useAuthContext } from '../../contexts/AuthContext';
 
 const Topbar = () => {
@@ -25,7 +17,7 @@ const Topbar = () => {
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
   const { logout } = useAuthContext();
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   const signOutHandler = (event) => {
     event.preventDefault();

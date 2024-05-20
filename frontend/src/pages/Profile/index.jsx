@@ -1,12 +1,10 @@
-import { useParams, useLocation } from 'react-router-dom';
+import { useAuthContext } from '../../contexts/AuthContext';
 
 const Profile = () => {
-  const { username } = useParams();
-  const location = useLocation();
-  const uname = location.pathname.split('/').pop();
+  const { user } = useAuthContext();
   return (
     <div>
-      <h1>Profile {uname}</h1>
+      <h1>Profile {user}</h1>
     </div>
   );
 };

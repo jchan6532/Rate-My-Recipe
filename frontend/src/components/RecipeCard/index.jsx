@@ -28,7 +28,7 @@ const defaultRating = 1;
 
 const RecipeCard = ({ RecipeData, options }) => {
   const theme = useTheme();
-  const [thumbnail, setThumbnail] = useState('./images/default-recipe.jpg');
+  const thumbnail = './images/default-recipe.jpg';
   const [rating, setRating] = useState(defaultRating);
 
   useEffect(() => console.log(rating), [rating]);

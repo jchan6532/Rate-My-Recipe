@@ -2,12 +2,10 @@ import { createContext, useContext, useState, useEffect } from 'react';
 import {
   GoogleAuthProvider,
   signInWithPopup,
-  signInWithRedirect,
   signOut,
   onAuthStateChanged,
 } from 'firebase/auth';
 import { auth } from '../services/firebase';
-import GoogleSignIn from '../components/GoogleSignIn';
 
 export const AuthContext = createContext({});
 
@@ -25,7 +23,7 @@ export const AuthContextProvider = ({ children }) => {
       }
 
       try {
-        const token = await currentUser.getIdToken();
+        //const token = await currentUser.getIdToken();
         setUser(currentUser);
         setAuthenticated(true);
       } catch (error) {
@@ -58,10 +56,12 @@ export const AuthContextProvider = ({ children }) => {
       value={{
         user,
         authenticated,
+        globalError,
         login,
         logout,
         goolgeSignIn,
         goolgeSignOut,
+        setGlobalError,
       }}
     >
       {children}

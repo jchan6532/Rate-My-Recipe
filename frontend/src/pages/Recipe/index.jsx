@@ -1,10 +1,6 @@
 import { useParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-
-const fetchRecipe = async () => {
-  axios.create();
-};
+//import { useQuery } from '@tanstack/react-query';
+//import axios from 'axios';
 
 const Recipe = () => {
   const { recipeId } = useParams();

@@ -10,7 +10,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/Inbox';
 import MenuIcon from '@mui/icons-material/Menu';
 import Home from '@mui/icons-material/Home';
 import Search from '@mui/icons-material/Search';

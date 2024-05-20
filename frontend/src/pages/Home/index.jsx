@@ -1,15 +1,4 @@
-import {
-  Box,
-  Button,
-  Toolbar,
-  Typography,
-  useTheme,
-  CircularProgress,
-  Backdrop,
-  Stack,
-  Grid,
-} from '@mui/material';
-import { tokens } from '../../theme.js';
+import { Box, Toolbar, CircularProgress, Backdrop, Grid } from '@mui/material';
 import Header from '../../components/Header/index.jsx';
 import { useQuery } from '@tanstack/react-query';
 import useFetchRecipes from '../../hooks/useFetchRecipes.js';
@@ -17,11 +6,8 @@ import RecipeCard from '../../components/RecipeCard/index.jsx';
 import { useEffect } from 'react';
 import { useAuthContext } from '../../contexts/AuthContext.jsx';
 import { useNavigate } from 'react-router-dom';
-import LoadingButton from '@mui/lab/LoadingButton';
 
 const Home = () => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
   const { authenticated, user } = useAuthContext();
   const navigate = useNavigate();
   const { fetchRecipes } = useFetchRecipes();

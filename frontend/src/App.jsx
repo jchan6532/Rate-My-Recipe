@@ -1,7 +1,6 @@
 import { ColorModeContext, useMode } from './theme';
-import { Box, CssBaseline, ThemeProvider } from '@mui/material';
+import { CssBaseline, ThemeProvider } from '@mui/material';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
-import Sidebar from './components/Sidebar';
 import CustomDrawer from './components/CustomDrawer';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
@@ -18,7 +17,7 @@ const qc = new QueryClient();
 
 const App = () => {
   const [theme, colorMode] = useMode();
-  const { queryClient } = useQueryClient();
+  //const { queryClient } = useQueryClient();
   const { authenticated } = useAuthContext();
   const location = useLocation();
   const navigate = useNavigate();

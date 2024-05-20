@@ -22,7 +22,10 @@ var builder = WebApplication.CreateBuilder(args);
     builder.Services.AddCors(options => {
         options.AddPolicy("AllowRemoteFrontEnd", 
         builder => {
-            builder.WithOrigins("https://rate-my-recipe.vercel.app")
+            builder.WithOrigins(
+                    "https://rate-my-recipe.vercel.app",
+                    "https://rate-my-recipe.netlify.app"
+                )
                 .AllowAnyHeader()
                 .AllowAnyMethod();
         });

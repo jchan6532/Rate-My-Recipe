@@ -7,7 +7,7 @@ import Profile from './pages/Profile';
 import Recipe from './pages/Recipe';
 import Settings from './pages/Settings';
 import NotFound from './pages/NotFound';
-import useQueryClient from './hooks/useQueryClient';
+//import useQueryClient from './hooks/useQueryClient';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import Topbar from './components/Topbar';
 import Login from './pages/Authentication/Login';

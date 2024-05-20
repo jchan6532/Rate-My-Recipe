@@ -38,6 +38,13 @@ namespace backend.Data
                     .HasForeignKey(l => l.UserId);
             });
 
+            modelBuilder.Entity<Comment>(comment => {
+                comment.HasKey(c => c.Id);
+
+                comment.Property(c => c.Id)
+                    .HasColumnType("character varying(255)");
+            });
+
             modelBuilder.Entity<Recipe>(recipe => {
                 recipe.HasKey(r => r.Id);
 

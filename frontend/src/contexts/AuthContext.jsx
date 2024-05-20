@@ -45,10 +45,12 @@ export const AuthContextProvider = ({ children }) => {
     setUser(null);
   };
   const login = () => {
-    if (!authenticated) setAuthenticated(true);
+    setAuthenticated(true);
+    setUser({ name: 'john doe', email: 'johndoe@gmail.com' });
   };
   const logout = () => {
-    if (authenticated) setAuthenticated(false);
+    setAuthenticated(false);
+    setUser(null);
   };
 
   return (

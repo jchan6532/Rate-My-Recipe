@@ -7,6 +7,7 @@ import Profile from './pages/Profile';
 import Recipe from './pages/Recipe';
 import Settings from './pages/Settings';
 import NotFound from './pages/NotFound';
+import MyRecipes from './pages/MyRecipes';
 //import useQueryClient from './hooks/useQueryClient';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import Topbar from './components/Topbar';
@@ -42,6 +43,7 @@ const App = () => {
                 <Route exact path='/profile' element={<Profile />} />
                 <Route exact path='/recipe/:recipeId' element={<Recipe />} />
                 <Route exact path='/settings' element={<Settings />} />
+                <Route exact path='/myrecipes' element={<MyRecipes />} />
                 <Route path='/notfound' element={<NotFound />} />
                 <Route path='*' element={<NotFound />} />
               </Routes>

@@ -7,11 +7,7 @@ import { useEffect } from 'react';
 import { useAuthContext } from '../../contexts/AuthContext.jsx';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-
-const recipeCardVairants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
-};
+import { recipeCardVairants } from '../../services/animations.js';
 
 const Home = () => {
   const { authenticated, user } = useAuthContext();

@@ -4,6 +4,7 @@ const validPaths = [
   '/profile',
   '/recipe/:recipeId',
   '/settings',
+  '/myrecipes',
 ];
 
 export const isValidPath = (currPath) => {

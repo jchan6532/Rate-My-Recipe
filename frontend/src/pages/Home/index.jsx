@@ -6,27 +6,30 @@ import RecipeCard from '../../components/RecipeCard/index.jsx';
 import { useEffect } from 'react';
 import { useAuthContext } from '../../contexts/AuthContext.jsx';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
+
+const recipeCardVairants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
+};
 
 const Home = () => {
   const { authenticated, user } = useAuthContext();
   const navigate = useNavigate();
   const { fetchRecipes } = useFetchRecipes();
-  const { data, status, isLoading } = useQuery({
+  const { data, status, error, isLoading } = useQuery({
     queryFn: fetchRecipes,
     queryKey: ['recipes'],
     refetchOnWindowFocus: true,
     refetchOnMount: true,
     refetchOnReconnect: true,
-    staleTime: 10,
+    refetchIntervalInBackground: 5000,
+    staleTime: 2000,
   });
 
   useEffect(() => {
     if (!authenticated || !user) navigate('/welcomeback');
   }, [authenticated, user, navigate]);
-
-  useEffect(() => {
-    console.log(data, status, isLoading);
-  }, [data, status, isLoading]);
 
   return (
     <Box margin={'0px'}>
@@ -66,7 +69,14 @@ const Home = () => {
             <Grid container rowSpacing={8}>
               {data?.recipes?.map((recipe) => (
                 <Grid item xs={18} sm={12} md={8} lg={6} key={recipe.id}>
-                  <RecipeCard RecipeData={recipe} />
+                  <motion.div
+                    initial='hidden'
+                    animate='visible'
+                    variants={recipeCardVairants}
+                    transition={{ duration: 0.5, delay: recipe.id * 0.1 }}
+                  >
+                    <RecipeCard RecipeData={recipe} />
+                  </motion.div>
                 </Grid>
               ))}
             </Grid>
